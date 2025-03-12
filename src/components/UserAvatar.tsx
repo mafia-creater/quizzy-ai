@@ -1,6 +1,6 @@
 import {User} from "next-auth";
 import React from "react";
-import { Avatar } from "./ui/avatar";
+import { Avatar, AvatarFallback } from "./ui/avatar";
 import Image from "next/image";
 
 type Props = {
@@ -15,7 +15,7 @@ const UserAvatar = ({user}: Props) => {
                     <Image fill src={user.image} alt="profile Image" referrerPolicy="no-referrer" />
                 </div>
             ):(
-                <h1>fallback</h1>
+                <AvatarFallback>{user.name?.[0]}</AvatarFallback>
             )}
         </Avatar>
         )      

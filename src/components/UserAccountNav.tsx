@@ -12,6 +12,7 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { LogOut } from "lucide-react";
+import UserAvatar from "./UserAvatar";
 
 type Props = {
   user: Pick<User, "name" | "image" | "email">;
@@ -20,13 +21,9 @@ type Props = {
 const UserAccountNav = ({ user }: Props) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className="flex items-center">
-          <Avatar>
-            <AvatarImage src={user.image || undefined} />
-            <AvatarFallback>{user.name?.charAt(0)}</AvatarFallback>
-          </Avatar>
-        </button>
+      <DropdownMenuTrigger>
+
+        <UserAvatar user={user} />
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="bg-white" align="end">
