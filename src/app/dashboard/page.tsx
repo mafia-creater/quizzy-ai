@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import React from 'react'
 import HotTopicsCard from './HotTopicsCard';
 import RecentActivities from '@/components/dashboard/RecentActivities';
+import CustomerWordCloud from '@/components/CustomerWordCloud';
 
 type Props = {}
 

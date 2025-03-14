@@ -1,4 +1,6 @@
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+"use client"
+import CustomerWordCloud from '@/components/CustomerWordCloud'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import React from 'react'
 
 type Props = {}
@@ -14,6 +16,9 @@ const HotTopicsCard = (props: Props) => {
                 Explore the latest trending topics
             </CardDescription>
         </CardHeader>
+        <CardContent className='pl-2'>
+            <CustomerWordCloud formattedTopics={[{ text: 'Example', value: 10 }]} />
+        </CardContent>
     </Card>
   )
 }
