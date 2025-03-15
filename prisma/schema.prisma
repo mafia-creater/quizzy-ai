@@ -47,7 +47,43 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime?
-  image    String?
-  accounts Account[]
-  sessions Session[]
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  games         Game[]   // Added relation to track games created by the user
+}
+
+model Game {
+  id          String  @id @default(cuid())
+  userId      String
+  timeStarted DateTime
+  timeEnded   DateTime?
+  gameType    GameType
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  questions   Question[]  // Added relation to link questions to a game
+
+  @@index([userId], name: "game_userId")
+  @@index([gameType], name: "game_gameType") // Added index for gameType
+}
+
+model Question {
+  id         String  @id @default(cuid()) 
+  question   String
+  answer     String
+  gameId     String
+  options    Json? // Ensure it is null when gameType is "fib"
+  isCorrect  Boolean?
+  percentageCorrect Float?
+  questionType GameType
+  userAnswer String?
+
+  game       Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
+
+  @@index([gameId], name: "question_gameId")
+  @@index([questionType], name: "question_questionType") // Added index for questionType
+}
+
+enum GameType {
+  mcq
+  fib
 }
